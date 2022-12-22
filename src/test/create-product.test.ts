@@ -8,7 +8,11 @@ describe('Create product', async () => {
 
   it('Should create a product', async () => {
     const mockedProduct = { id: '0', name: 'test' };
-    prisma.product.create.mockReturnValue(Promise.resolve(mockedProduct));
+    prisma.product.create.mockReturnValue(
+      Promise.resolve(mockedProduct) as unknown as ReturnType<
+        typeof prisma.product.create
+      >,
+    );
 
     const response = await client.mutate(
       `
