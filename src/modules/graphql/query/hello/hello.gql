@@ -1,0 +1,7 @@
+input HelloInput {
+  name: String!
+}
+
+extend type Query {
+  hello(input: HelloInput!): String!
+}

@@ -1,0 +1,8 @@
+[
+  "type Mutation",
+  "type Query",
+  "type Subscription",
+  "input CreateProductInput {\n  name: String!\n}\n\ntype CreateProductPayload {\n  id: String!\n  name: String!\n}\n\nextend type Mutation {\n  createProduct(input: CreateProductInput!): CreateProductPayload!\n}",
+  "input HelloInput {\n  name: String!\n}\n\nextend type Query {\n  hello(input: HelloInput!): String!\n}",
+  "extend type Subscription {\n  productCreated: CreateProductPayload\n}"
+]
