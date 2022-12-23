@@ -2,12 +2,10 @@ import { FastifyInstance } from 'fastify';
 import { buildSchema } from 'graphql';
 import mercurius from 'mercurius';
 import mercuriusCodegen, { loadSchemaFiles } from 'mercurius-codegen';
-import { mergeAll } from 'rambda';
 
 import { buildContext } from './context';
-import { MUTATION_RESOLVERS } from './mutation/resolvers';
-import { QUERY_RESOLVERS } from './query/resolvers';
-import { SUBSCRIPTION_RESOLVERS } from './subscription/resolvers';
+import { LOADERS } from './loaders';
+import { RESOLVERS } from './resolvers';
 
 const generateSchema = (app: FastifyInstance, schema: string[]) => {
   app.graphql.replaceSchema(buildSchema(schema.join('\n')));
@@ -33,11 +31,8 @@ export const registerGraphQL = (app: FastifyInstance) => {
 
   return app.register(mercurius, {
     schema,
-    resolvers: mergeAll([
-      ...MUTATION_RESOLVERS,
-      ...QUERY_RESOLVERS,
-      ...SUBSCRIPTION_RESOLVERS,
-    ]),
+    resolvers: RESOLVERS,
+    loaders: LOADERS,
     graphiql: true,
     context: buildContext(app),
     subscription: true,

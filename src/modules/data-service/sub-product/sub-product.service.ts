@@ -1,14 +1,15 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, SubProduct } from '@prisma/client';
 
 import { FilteringOptions } from '../types';
 import { toPrismaSelect } from '../utils';
 
 export const subProductService = (prisma: PrismaClient) => ({
-  findByProductId: (productId: string, options?: FilteringOptions) =>
+  findByProductIds: (productIds: string[], options?: FilteringOptions) =>
     prisma.subProduct.findMany({
-      where: { productId },
+      where: { productId: { in: productIds } },
       select: toPrismaSelect(options?.select),
-    }),
+    }) as Promise<Partial<SubProduct>[]>,
+
   create: (productId: string, name: string, options?: FilteringOptions) =>
     prisma.subProduct.create({
       data: {
@@ -16,5 +17,5 @@ export const subProductService = (prisma: PrismaClient) => ({
         name,
       },
       select: toPrismaSelect(options?.select),
-    }),
+    }) as Promise<Partial<SubProduct>>,
 });

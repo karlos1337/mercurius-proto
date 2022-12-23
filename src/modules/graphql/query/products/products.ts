@@ -1,13 +1,13 @@
 import { getSelectionFields } from '#modules/graphql/utils';
 import { QueryResolvers } from '../../generated_types';
 
-export const product: QueryResolvers['product'] = async (
+export const products: QueryResolvers['products'] = async (
   _root,
-  { input: { id } },
+  _input,
   { data },
   info,
 ) => {
   const select = getSelectionFields(info, { exclude: ['subProducts'] });
-  const product = await data.product.findOne(id, { select });
+  const product = await data.product.findMany({ select });
   return product;
 };

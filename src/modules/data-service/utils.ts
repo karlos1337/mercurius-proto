@@ -1,2 +1,7 @@
 export const toPrismaSelect = (select: string[] = []) =>
-  select?.reduce((result, selection) => ({ ...result, [selection]: true }), {});
+  select.length
+    ? select.reduce(
+        (result, selection) => ({ ...result, [selection]: true }),
+        {},
+      )
+    : { id: true };

@@ -2,11 +2,17 @@ input ProductInput {
   id: String!
 }
 
-type ProductPayload {
+type SubProduct {
   id: String!
   name: String!
 }
 
+type Product {
+  id: String!
+  name: String!
+  subProducts: [SubProduct!]!
+}
+
 extend type Query {
-  product(input: ProductInput!): ProductPayload
+  product(input: ProductInput!): Product
 }

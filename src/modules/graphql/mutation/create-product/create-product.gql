@@ -3,5 +3,5 @@ input CreateProductInput {
 }
 
 extend type Mutation {
-  createProduct(input: CreateProductInput!): ProductPayload!
+  createProduct(input: CreateProductInput!): Product!
 }

@@ -4,5 +4,5 @@ input CreateSubProductInput {
 }
 
 extend type Mutation {
-  createSubProduct(input: CreateSubProductInput!): SubProductPayload!
+  createSubProduct(input: CreateSubProductInput!): SubProduct!
 }

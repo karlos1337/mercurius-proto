@@ -1,7 +1,25 @@
 import { GraphQLResolveInfo } from 'graphql';
 import graphqlFields from 'graphql-fields';
 
-export const getSelectionFields = (info: GraphQLResolveInfo) =>
+import { Loader } from './generated_types';
+
+export interface GetSelectionFieldsOptions {
+  exclude: string[];
+}
+
+export const getSelectionFields = <T>(
+  info: GraphQLResolveInfo,
+  { exclude }: GetSelectionFieldsOptions = { exclude: [] },
+): Array<keyof T> =>
   Object.keys(
     graphqlFields(info as unknown as Parameters<typeof graphqlFields>[0]),
-  );
+  ).filter((key) => !exclude.includes(key)) as Array<keyof T>;
+
+export const getLoaderSelectionFields = <T>(
+  queries: Parameters<Loader<unknown, unknown, unknown, unknown>>[0],
+  options: GetSelectionFieldsOptions = { exclude: [] },
+) => {
+  const info = (queries[0] as unknown as { info: GraphQLResolveInfo }).info;
+
+  return getSelectionFields<T>(info, options);
+};
