@@ -1,3 +1,4 @@
+import { getSelectionFields } from '#modules/graphql/utils';
 import { MutationResolvers } from '../../generated_types';
 
 export const PRODUCT_CREATED_SOCKET = 'productCreated';
@@ -6,8 +7,10 @@ export const createProduct: MutationResolvers['createProduct'] = async (
   _root,
   { input: { name } },
   { data, pubsub },
+  info,
 ) => {
-  const product = await data.product.create(name);
+  const select = getSelectionFields(info);
+  const product = await data.product.create(name, { select });
 
   if (product) {
     pubsub.publish({

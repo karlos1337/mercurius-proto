@@ -1,0 +1,12 @@
+input ProductInput {
+  id: String!
+}
+
+type ProductPayload {
+  id: String!
+  name: String!
+}
+
+extend type Query {
+  product(input: ProductInput!): ProductPayload
+}

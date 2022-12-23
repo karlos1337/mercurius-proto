@@ -8,7 +8,15 @@ generator client {
   binaryTargets = ["native","linux-musl"]
 }
 
+model SubProduct {
+  id        String  @id @default(uuid())
+  name      String  @unique
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+}
+
 model Product {
-  id   String @id @default(uuid())
-  name String @unique
+  id          String       @id @default(uuid())
+  name        String       @unique
+  subProducts SubProduct[]
 }

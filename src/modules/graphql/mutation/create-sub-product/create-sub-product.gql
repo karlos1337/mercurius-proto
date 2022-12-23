@@ -1,0 +1,8 @@
+input CreateSubProductInput {
+  productId: String!
+  name: String!
+}
+
+extend type Mutation {
+  createSubProduct(input: CreateSubProductInput!): SubProductPayload!
+}

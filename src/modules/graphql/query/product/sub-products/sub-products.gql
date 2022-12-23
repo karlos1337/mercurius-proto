@@ -1,0 +1,9 @@
+
+type SubProductPayload {
+  id: String!
+  name: String!
+}
+
+extend type ProductPayload {
+  subProducts: [SubProductPayload!]!
+}

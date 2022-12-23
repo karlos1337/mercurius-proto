@@ -2,11 +2,6 @@ input CreateProductInput {
   name: String!
 }
 
-type CreateProductPayload {
-  id: String!
-  name: String!
-}
-
 extend type Mutation {
-  createProduct(input: CreateProductInput!): CreateProductPayload!
+  createProduct(input: CreateProductInput!): ProductPayload!
 }

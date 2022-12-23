@@ -2,7 +2,9 @@
   "type Mutation",
   "type Query",
   "type Subscription",
-  "input CreateProductInput {\n  name: String!\n}\n\ntype CreateProductPayload {\n  id: String!\n  name: String!\n}\n\nextend type Mutation {\n  createProduct(input: CreateProductInput!): CreateProductPayload!\n}",
-  "input HelloInput {\n  name: String!\n}\n\nextend type Query {\n  hello(input: HelloInput!): String!\n}",
-  "extend type Subscription {\n  productCreated: CreateProductPayload\n}"
+  "input CreateProductInput {\n  name: String!\n}\n\nextend type Mutation {\n  createProduct(input: CreateProductInput!): ProductPayload!\n}",
+  "input CreateSubProductInput {\n  productId: String!\n  name: String!\n}\n\nextend type Mutation {\n  createSubProduct(input: CreateSubProductInput!): SubProductPayload!\n}",
+  "input ProductInput {\n  id: String!\n}\n\ntype ProductPayload {\n  id: String!\n  name: String!\n}\n\nextend type Query {\n  product(input: ProductInput!): ProductPayload\n}",
+  "extend type Subscription {\n  productCreated: ProductPayload\n}",
+  "type SubProductPayload {\n  id: String!\n  name: String!\n}\n\nextend type ProductPayload {\n  subProducts: [SubProductPayload!]!\n}"
 ]

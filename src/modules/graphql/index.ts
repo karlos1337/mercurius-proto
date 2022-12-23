@@ -34,9 +34,9 @@ export const registerGraphQL = (app: FastifyInstance) => {
   return app.register(mercurius, {
     schema,
     resolvers: mergeAll([
-      MUTATION_RESOLVERS,
-      QUERY_RESOLVERS,
-      SUBSCRIPTION_RESOLVERS,
+      ...MUTATION_RESOLVERS,
+      ...QUERY_RESOLVERS,
+      ...SUBSCRIPTION_RESOLVERS,
     ]),
     graphiql: true,
     context: buildContext(app),

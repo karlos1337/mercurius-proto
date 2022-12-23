@@ -34,38 +34,55 @@ export type Scalars = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createProduct: CreateProductPayload;
+  createProduct: ProductPayload;
+  createSubProduct: SubProductPayload;
 };
 
 export type MutationcreateProductArgs = {
   input: CreateProductInput;
 };
 
-export type Query = {
-  __typename?: 'Query';
-  hello: Scalars['String'];
+export type MutationcreateSubProductArgs = {
+  input: CreateSubProductInput;
 };
 
-export type QueryhelloArgs = {
-  input: HelloInput;
+export type Query = {
+  __typename?: 'Query';
+  product?: Maybe<ProductPayload>;
+};
+
+export type QueryproductArgs = {
+  input: ProductInput;
 };
 
 export type Subscription = {
   __typename?: 'Subscription';
-  productCreated?: Maybe<CreateProductPayload>;
+  productCreated?: Maybe<ProductPayload>;
 };
 
 export type CreateProductInput = {
   name: Scalars['String'];
 };
 
-export type CreateProductPayload = {
-  __typename?: 'CreateProductPayload';
-  id: Scalars['String'];
+export type CreateSubProductInput = {
+  productId: Scalars['String'];
   name: Scalars['String'];
 };
 
-export type HelloInput = {
+export type ProductInput = {
+  id: Scalars['String'];
+};
+
+export type ProductPayload = {
+  __typename?: 'ProductPayload';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  subProducts: Array<SubProductPayload>;
+};
+
+export type SubProductPayload = {
+  __typename?: 'SubProductPayload';
+  id: Scalars['String'];
   name: Scalars['String'];
 };
 
@@ -171,11 +188,13 @@ export type DirectiveResolverFn<
 export type ResolversTypes = {
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
-  String: ResolverTypeWrapper<Scalars['String']>;
   Subscription: ResolverTypeWrapper<{}>;
   CreateProductInput: CreateProductInput;
-  CreateProductPayload: ResolverTypeWrapper<CreateProductPayload>;
-  HelloInput: HelloInput;
+  String: ResolverTypeWrapper<Scalars['String']>;
+  CreateSubProductInput: CreateSubProductInput;
+  ProductInput: ProductInput;
+  ProductPayload: ResolverTypeWrapper<ProductPayload>;
+  SubProductPayload: ResolverTypeWrapper<SubProductPayload>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
@@ -183,11 +202,13 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Mutation: {};
   Query: {};
-  String: Scalars['String'];
   Subscription: {};
   CreateProductInput: CreateProductInput;
-  CreateProductPayload: CreateProductPayload;
-  HelloInput: HelloInput;
+  String: Scalars['String'];
+  CreateSubProductInput: CreateSubProductInput;
+  ProductInput: ProductInput;
+  ProductPayload: ProductPayload;
+  SubProductPayload: SubProductPayload;
   Boolean: Scalars['Boolean'];
 };
 
@@ -196,10 +217,16 @@ export type MutationResolvers<
   ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation'],
 > = {
   createProduct?: Resolver<
-    ResolversTypes['CreateProductPayload'],
+    ResolversTypes['ProductPayload'],
     ParentType,
     ContextType,
     RequireFields<MutationcreateProductArgs, 'input'>
+  >;
+  createSubProduct?: Resolver<
+    ResolversTypes['SubProductPayload'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationcreateSubProductArgs, 'input'>
   >;
 };
 
@@ -207,11 +234,11 @@ export type QueryResolvers<
   ContextType = MercuriusContext,
   ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query'],
 > = {
-  hello?: Resolver<
-    ResolversTypes['String'],
+  product?: Resolver<
+    Maybe<ResolversTypes['ProductPayload']>,
     ParentType,
     ContextType,
-    RequireFields<QueryhelloArgs, 'input'>
+    RequireFields<QueryproductArgs, 'input'>
   >;
 };
 
@@ -220,16 +247,30 @@ export type SubscriptionResolvers<
   ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription'],
 > = {
   productCreated?: SubscriptionResolver<
-    Maybe<ResolversTypes['CreateProductPayload']>,
+    Maybe<ResolversTypes['ProductPayload']>,
     'productCreated',
     ParentType,
     ContextType
   >;
 };
 
-export type CreateProductPayloadResolvers<
+export type ProductPayloadResolvers<
   ContextType = MercuriusContext,
-  ParentType extends ResolversParentTypes['CreateProductPayload'] = ResolversParentTypes['CreateProductPayload'],
+  ParentType extends ResolversParentTypes['ProductPayload'] = ResolversParentTypes['ProductPayload'],
+> = {
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  subProducts?: Resolver<
+    Array<ResolversTypes['SubProductPayload']>,
+    ParentType,
+    ContextType
+  >;
+  isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SubProductPayloadResolvers<
+  ContextType = MercuriusContext,
+  ParentType extends ResolversParentTypes['SubProductPayload'] = ResolversParentTypes['SubProductPayload'],
 > = {
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -240,7 +281,8 @@ export type Resolvers<ContextType = MercuriusContext> = {
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Subscription?: SubscriptionResolvers<ContextType>;
-  CreateProductPayload?: CreateProductPayloadResolvers<ContextType>;
+  ProductPayload?: ProductPayloadResolvers<ContextType>;
+  SubProductPayload?: SubProductPayloadResolvers<ContextType>;
 };
 
 export type Loader<TReturn, TObj, TParams, TContext> = (
@@ -265,14 +307,20 @@ export interface Loaders<
     reply: import('fastify').FastifyReply;
   },
 > {
-  CreateProductPayload?: {
-    id?: LoaderResolver<Scalars['String'], CreateProductPayload, {}, TContext>;
-    name?: LoaderResolver<
-      Scalars['String'],
-      CreateProductPayload,
+  ProductPayload?: {
+    id?: LoaderResolver<Scalars['String'], ProductPayload, {}, TContext>;
+    name?: LoaderResolver<Scalars['String'], ProductPayload, {}, TContext>;
+    subProducts?: LoaderResolver<
+      Array<SubProductPayload>,
+      ProductPayload,
       {},
       TContext
     >;
+  };
+
+  SubProductPayload?: {
+    id?: LoaderResolver<Scalars['String'], SubProductPayload, {}, TContext>;
+    name?: LoaderResolver<Scalars['String'], SubProductPayload, {}, TContext>;
   };
 }
 declare module 'mercurius' {
