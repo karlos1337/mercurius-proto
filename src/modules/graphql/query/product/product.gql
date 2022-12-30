@@ -5,6 +5,7 @@ input ProductInput {
 type SubProduct {
   id: String!
   name: String!
+  productId: String!
 }
 
 type Product {

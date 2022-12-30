@@ -4,7 +4,7 @@
   "type Subscription",
   "input CreateProductInput {\n  name: String!\n}\n\nextend type Mutation {\n  createProduct(input: CreateProductInput!): Product!\n}",
   "input CreateSubProductInput {\n  productId: String!\n  name: String!\n}\n\nextend type Mutation {\n  createSubProduct(input: CreateSubProductInput!): SubProduct!\n}",
-  "input ProductInput {\n  id: String!\n}\n\ntype SubProduct {\n  id: String!\n  name: String!\n}\n\ntype Product {\n  id: String!\n  name: String!\n  subProducts: [SubProduct!]!\n}\n\nextend type Query {\n  product(input: ProductInput!): Product\n}",
+  "input ProductInput {\n  id: String!\n}\n\ntype SubProduct {\n  id: String!\n  name: String!\n  productId: String!\n}\n\ntype Product {\n  id: String!\n  name: String!\n  subProducts: [SubProduct!]!\n}\n\nextend type Query {\n  product(input: ProductInput!): Product\n}",
   "extend type Query {\n  products: [Product!]!\n}",
   "extend type Subscription {\n  productCreated: Product\n}"
 ]

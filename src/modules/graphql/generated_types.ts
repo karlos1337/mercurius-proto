@@ -33,7 +33,6 @@ export type Scalars = {
 };
 
 export type Mutation = {
-  __typename?: 'Mutation';
   createProduct: Product;
   createSubProduct: SubProduct;
 };
@@ -47,7 +46,6 @@ export type MutationcreateSubProductArgs = {
 };
 
 export type Query = {
-  __typename?: 'Query';
   product?: Maybe<Product>;
   products: Array<Product>;
 };
@@ -57,7 +55,6 @@ export type QueryproductArgs = {
 };
 
 export type Subscription = {
-  __typename?: 'Subscription';
   productCreated?: Maybe<Product>;
 };
 
@@ -75,13 +72,12 @@ export type ProductInput = {
 };
 
 export type SubProduct = {
-  __typename?: 'SubProduct';
   id: Scalars['String'];
   name: Scalars['String'];
+  productId: Scalars['String'];
 };
 
 export type Product = {
-  __typename?: 'Product';
   id: Scalars['String'];
   name: Scalars['String'];
   subProducts: Array<SubProduct>;
@@ -266,6 +262,7 @@ export type SubProductResolvers<
 > = {
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  productId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -316,6 +313,7 @@ export interface Loaders<
   SubProduct?: {
     id?: LoaderResolver<Scalars['String'], SubProduct, {}, TContext>;
     name?: LoaderResolver<Scalars['String'], SubProduct, {}, TContext>;
+    productId?: LoaderResolver<Scalars['String'], SubProduct, {}, TContext>;
   };
 
   Product?: {

@@ -6,11 +6,10 @@ import { subProductService } from './sub-product/sub-product.service';
 
 const DATA_SERVICE_KEY = 'dataService';
 
-const dataService = {
-  product: productService(prismaClient),
-  subProduct: subProductService(prismaClient),
+export type DataService = {
+  product: ReturnType<typeof productService>;
+  subProduct: ReturnType<typeof subProductService>;
 };
-export type DataService = typeof dataService;
 
 declare module 'fastify' {
   interface FastifyInstance {
@@ -19,5 +18,9 @@ declare module 'fastify' {
 }
 
 export const registerDataService = (app: FastifyInstance) => {
+  const dataService: DataService = {
+    product: productService(prismaClient),
+    subProduct: subProductService(prismaClient),
+  };
   app.decorate(DATA_SERVICE_KEY, dataService);
 };
