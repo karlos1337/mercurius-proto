@@ -1,5 +1,5 @@
 import { getSelectionFields } from '#modules/graphql/utils';
-import { MutationResolvers } from '../../generated_types';
+import { MutationResolvers } from '../../generated-types';
 
 export const PRODUCT_CREATED_SOCKET = 'productCreated';
 

@@ -1,7 +1,7 @@
 import { MercuriusContext, MercuriusLoaders } from 'mercurius';
 import { groupBy } from 'rambda';
 
-import { SubProduct } from '#modules/graphql/generated_types';
+import { SubProduct } from '#modules/graphql/generated-types';
 import { getLoaderSelectionFields } from '#modules/graphql/utils';
 
 export const PRODUCT_LOADERS: MercuriusLoaders<MercuriusContext> = {

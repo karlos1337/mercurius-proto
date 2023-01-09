@@ -13,7 +13,7 @@
   ],
   "ignorePatterns": [
     "/dist",
-    "generated_types.ts"
+    "generated-types.ts"
   ],
   "rules": {
     "no-unused-vars": "off",

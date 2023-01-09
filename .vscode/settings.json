@@ -1,0 +1,19 @@
+{
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/coverage": true
+  },
+  "cSpell.words": [
+    "Codegen",
+    "Fastify",
+    "datasource",
+    "graphiql",
+    "mercurius",
+    "musl",
+    "postgresql",
+    "prebuild",
+    "schemix",
+    "vitest"
+  ]
+}

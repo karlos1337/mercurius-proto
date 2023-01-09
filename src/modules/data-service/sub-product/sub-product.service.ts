@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
-import { SubProduct } from '#modules/graphql/generated_types';
+import { SubProduct } from '#modules/graphql/generated-types';
 import { FilteringOptions } from '../types';
 import { toPrismaSelect } from '../utils';
 

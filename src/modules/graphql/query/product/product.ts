@@ -1,5 +1,5 @@
 import { getSelectionFields } from '#modules/graphql/utils';
-import { Product, QueryResolvers } from '../../generated_types';
+import { Product, QueryResolvers } from '../../generated-types';
 
 export const product: QueryResolvers['product'] = async (
   _root,
