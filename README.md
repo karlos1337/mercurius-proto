@@ -10,3 +10,4 @@ All formal documentation resides inside `/docs` folder:
 2. [Development](docs/development.md)
    1. [Coding guidelines](docs/development/coding-guidelines.md)
    2. [Structure](docs/development/structure.md)
+3. [Testing](docs/testing.md)
