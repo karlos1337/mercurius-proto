@@ -1,7 +1,7 @@
 import { GraphQLResolveInfo } from 'graphql';
 import graphqlFields from 'graphql-fields';
 
-import { Loader } from './generated_types';
+import { Loader } from './generated-types';
 
 export interface GetSelectionFieldsOptions<T> {
   exclude: Array<keyof T>;

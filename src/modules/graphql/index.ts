@@ -11,7 +11,7 @@ const generateSchema = (app: FastifyInstance, schema: string[]) => {
   app.graphql.replaceSchema(buildSchema(schema.join('\n')));
 
   mercuriusCodegen(app, {
-    targetPath: 'src/modules/graphql/generated_types.ts',
+    targetPath: 'src/modules/graphql/generated-types.ts',
     codegenConfig: {
       skipTypename: true,
     },

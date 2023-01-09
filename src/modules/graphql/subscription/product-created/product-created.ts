@@ -1,4 +1,4 @@
-import { SubscriptionResolvers } from '../../generated_types';
+import { SubscriptionResolvers } from '../../generated-types';
 import { PRODUCT_CREATED_SOCKET } from '../../mutation/create-product/create-product';
 
 export const productCreated: SubscriptionResolvers['productCreated'] = {
